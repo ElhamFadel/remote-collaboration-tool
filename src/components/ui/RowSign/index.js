@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Button from '../Button';
-import { loginWithGoogle, loginWithFacebook } from '../../../firebase/utils';
+import { loginWithGoogle, loginWithFacebook, loginWithGithub } from '../../../firebase/utils';
 const infoSign = [
   {
     id: 1,
@@ -19,7 +19,8 @@ const infoSign = [
   {
     id: 3,
     title: 'Sign in with GitHub',
-    color: '#5f6368'
+    color: '#5f6368',
+    onClick: loginWithGithub
   }
 ];
 
