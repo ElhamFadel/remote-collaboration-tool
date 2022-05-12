@@ -6,10 +6,7 @@ const Register = () => {
       {/* <S.RegisterLogo /> */}
       <RowSign />
     </S.RegisterContainer>
-  )
-}
+  );
+};
 
-export default Register
-
-
-
+export default Register;

@@ -1,10 +1,10 @@
 import * as S from './style';
-const Button = ({label,color}) => {
+const Button = ({ label, color, width }) => {
   return (
-    <S.ButtonContainer color={color}>
+    <S.ButtonContainer color={color} width={width}>
       {label}
     </S.ButtonContainer>
-  )
-}
+  );
+};
 
-export default Button
+export default Button;
