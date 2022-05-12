@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.968);
+  background: linear-gradient(to bottom, #837bce 0%, #837bce 100%);
+}
+
+code {
+  font-family:'Roboto', sans-serif;
+}
+a{
+  text-decoration: none; 
+  color:#fff; 
+}
