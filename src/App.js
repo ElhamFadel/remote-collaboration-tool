@@ -1,9 +1,9 @@
 import './App.css';
-import Space from './pages/Space';
+import Auth from './pages/Auth';
 function App() {
   return (
     <>
-      <Space />
+      <Auth />
     </>
   );
 }
