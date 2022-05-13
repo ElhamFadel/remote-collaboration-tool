@@ -3,7 +3,8 @@ import {
   FacebookAuthProvider,
   getAuth,
   signInWithPopup,
-  GithubAuthProvider
+  GithubAuthProvider,
+  RecaptchaVerifier
 } from 'firebase/auth';
 import './config';
 const auth = getAuth();
@@ -51,4 +52,25 @@ export const loginWithGithub = async () => {
   } catch (error) {
     console.log(error);
   }
+};
+
+//invisible reCAPTCHA
+export const invisibleRecaptcha = () => {
+  window.recaptchaVerifier = new RecaptchaVerifier(
+    'recaptcha-container',
+    {
+      size: 'normal',
+      callback: () => {
+        console.log('Verified');
+        // reCAPTCHA solved, allow signInWithPhoneNumber.
+        // ...
+      },
+      'expired-callback': () => {
+        console.log('Expired');
+        // Response expired. Ask user to solve reCAPTCHA again.
+        // ...
+      }
+    },
+    auth
+  );
 };
