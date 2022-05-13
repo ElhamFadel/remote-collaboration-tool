@@ -1,7 +1,7 @@
 import './App.css';
 import './firebase/config';
 import { RecaptchaVerifier, getAuth, signInWithPhoneNumber } from 'firebase/auth';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const auth = getAuth();
 const generateRecaptcha = () => {
@@ -9,6 +9,7 @@ const generateRecaptcha = () => {
   window.recaptchaVerifier = new RecaptchaVerifier(
     'recaptcha-container',
     {
+      size: 'invisible',
       callback: (response) => {
         console.log(response, 'response', 'Hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
       }
@@ -33,31 +34,31 @@ const requestOTP = async () => {
 function App() {
   const [code, setCode] = useState('');
 
-  // const verifyOTP = async () => {
-  //   try {
-  //     if (code.length === 6) {
-  //       const confirmationResult = window.confirmationResult;
-  //       confirmationResult
-  //         .confirm(code)
-  //         .then((result) => {
-  //           // User signed in successfully.
-  //           // const user = result.user;
-  //           console.log('User signed in successfully', result);
-  //           // ...
-  //         })
-  //         .catch((error) => {
-  //           // User couldn't sign in (bad verification code?)
-  //           console.log(error);
-  //         });
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const verifyOTP = async () => {
+    try {
+      if (code.length === 6) {
+        const confirmationResult = window.confirmationResult;
+        confirmationResult
+          .confirm(code)
+          .then((result) => {
+            // User signed in successfully.
+            const user = result.user;
+            console.log('User signed in successfully', result, user);
+            // ...
+          })
+          .catch((error) => {
+            // User couldn't sign in (bad verification code?)
+            console.log(error);
+          });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // useEffect(() => {
-  //   verifyOTP();
-  // }, [code]);
+  useEffect(() => {
+    verifyOTP();
+  }, [code]);
 
   return (
     <>
