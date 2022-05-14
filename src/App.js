@@ -1,9 +1,13 @@
 import './App.css';
 import Auth from './pages/Auth';
-// import UserProvider from './hooks/useContextProvider';
+import UseAuthProvider from './hooks/useAuthProvider';
 
 function App() {
-  return <Auth />;
+  return (
+    <UseAuthProvider>
+      <Auth />
+    </UseAuthProvider>
+  );
 }
 
 export default App;
