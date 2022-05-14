@@ -3,8 +3,9 @@ import {
   FacebookAuthProvider,
   getAuth,
   signInWithPopup,
-  GithubAuthProvider,
-  RecaptchaVerifier
+  GithubAuthProvider
+  // RecaptchaVerifier,
+  // signInWithPhoneNumber
 } from 'firebase/auth';
 import './config';
 const auth = getAuth();
@@ -55,22 +56,50 @@ export const loginWithGithub = async () => {
 };
 
 //invisible reCAPTCHA
-export const invisibleRecaptcha = () => {
-  window.recaptchaVerifier = new RecaptchaVerifier(
-    'recaptcha-container',
-    {
-      size: 'normal',
-      callback: () => {
-        console.log('Verified');
-        // reCAPTCHA solved, allow signInWithPhoneNumber.
-        // ...
-      },
-      'expired-callback': () => {
-        console.log('Expired');
-        // Response expired. Ask user to solve reCAPTCHA again.
-        // ...
-      }
-    },
-    auth
-  );
-};
+// const generateRecaptcha = () => {
+//   console.log('generateRecaptcha');
+//   window.recaptchaVerifier = new RecaptchaVerifier(
+//     'recaptcha-container',
+//     {
+//       size: 'invisible',
+//       callback: (response) => {
+//         console.log(response, 'response', 'Hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
+//       }
+//     },
+//     auth
+//   );
+// };
+// export const requestOTP = async () => {
+//   try {
+//     const phoneNumber = '+972 597 853623';
+//     generateRecaptcha();
+//     console.log('requestOTP Hiiiiiiiiiiii');
+//     const appVerifi = window.recaptchaVerifier;
+//     const confirmationResult = await signInWithPhoneNumber(auth, phoneNumber, appVerifi);
+//     console.log(confirmationResult, 'confirmationResult');
+//     window.confirmationResult = confirmationResult;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+// export const verifyOTP = async () => {
+//   try {
+//     if (code.length === 6) {
+//       const confirmationResult = window.confirmationResult;
+//       confirmationResult
+//         .confirm(code)
+//         .then((result) => {
+//           // User signed in successfully.
+//           const user = result.user;
+//           console.log('User signed in successfully', result, user);
+//           // ...
+//         })
+//         .catch((error) => {
+//           // User couldn't sign in (bad verification code?)
+//           console.log(error);
+//         });
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
