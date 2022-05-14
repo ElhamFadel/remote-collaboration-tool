@@ -2,7 +2,8 @@ const initialState = {
   email: '',
   password: '',
   name: '',
-  phone: ''
+  phone: '',
+  photo: ''
 };
 // factore this function
 const stateController = (state, action) => {
@@ -12,9 +13,12 @@ const stateController = (state, action) => {
     case 'password':
       return { ...state, password: action.payload };
     case 'name':
+      console.log('jjjjjjjjjjjjjjjjjjjj');
       return { ...state, name: action.payload };
     case 'phone':
       return { ...state, phone: action.payload };
+    case 'photo':
+      return { ...state, photo: action.payload };
     default:
       return state;
   }
