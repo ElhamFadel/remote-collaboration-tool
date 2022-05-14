@@ -7,7 +7,11 @@ const Button = ({ label, color, width, onClick }) => {
       color={color}
       width={width}
       onClick={() =>
-        onClick().then((user) => dispatch({ type: 'name', payload: user.displayName }))
+        onClick().then(({ name, email, photo }) => {
+          dispatch({ type: 'name', payload: name });
+          dispatch({ type: 'email', payload: email });
+          dispatch({ type: 'photo', payload: photo });
+        })
       }>
       {label}
     </S.ButtonContainer>

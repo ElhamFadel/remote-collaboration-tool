@@ -13,7 +13,6 @@ const stateController = (state, action) => {
     case 'password':
       return { ...state, password: action.payload };
     case 'name':
-      console.log('jjjjjjjjjjjjjjjjjjjj');
       return { ...state, name: action.payload };
     case 'phone':
       return { ...state, phone: action.payload };

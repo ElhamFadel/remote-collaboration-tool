@@ -8,10 +8,7 @@ import {
   // signInWithPhoneNumber
 } from 'firebase/auth';
 import './config';
-// import useForm from '../hooks/useForm';
-import { stateController, initialState } from '../store';
 const auth = getAuth();
-// const { dispatch } = useForm();
 
 const googleAuthProvider = new GoogleAuthProvider();
 const facebookAuthProvider = new FacebookAuthProvider();
@@ -26,11 +23,9 @@ export const loginWithGoogle = async () => {
     const user = result.user;
     console.log(user, 'user');
     console.log(user.displayName, 'user.displayName', user.email);
-    console.log(initialState, 'initialState');
     return new Promise((resolve) => {
       resolve(user);
     });
-    // dispatch({ type: 'email', payload: user.email });
   } catch (error) {
     console.log(error);
   }
@@ -40,14 +35,8 @@ export const loginWithGoogle = async () => {
 export const loginWithFacebook = async () => {
   try {
     const result = await signInWithPopup(auth, facebookAuthProvider);
-    const credential = FacebookAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    console.log(token, 'token');
     const user = result.user;
     console.log(user, 'user');
-    stateController({ type: 'name', payload: user.displayName });
-    stateController({ type: 'email', payload: user.email });
-    stateController({ type: 'photo', payload: user.photoURL });
     return { email: user.email, name: user.displayName, photo: user.photoURL };
   } catch (error) {
     console.log(error);
@@ -58,14 +47,7 @@ export const loginWithFacebook = async () => {
 export const loginWithGithub = async () => {
   try {
     const result = await signInWithPopup(auth, githubAuthProvider);
-    const credential = GithubAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    console.log(token, 'token');
     const user = result.user;
-    console.log(user, 'user');
-    stateController({ type: 'name', payload: user.displayName });
-    stateController({ type: 'email', payload: user.email });
-    stateController({ type: 'photo', payload: user.photoURL });
     return { email: user.email, name: user.displayName, photo: user.photoURL };
   } catch (error) {
     console.log(error);
