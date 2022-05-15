@@ -1,12 +1,21 @@
 import * as S from './styles';
 import { RowSign } from '../ui';
+import { useAuthContext } from '../../hooks/useAuthProvider';
 import Form from '../Form';
 const Register = () => {
+  const { isSubmitting } = useAuthContext();
+  console.log(isSubmitting, 'isSubmitting');
   return (
     <S.RegisterContainer>
       {/* <S.RegisterLogo /> */}
-      <RowSign />
-      <Form />
+      {isSubmitting ? (
+        <h1>Hellooooooo</h1>
+      ) : (
+        <>
+          <RowSign />
+          <Form />
+        </>
+      )}
     </S.RegisterContainer>
   );
 };

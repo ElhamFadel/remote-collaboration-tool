@@ -35,7 +35,7 @@ const Form = () => {
           onChange={(e) => dispatch({ type: id, payload: e.target.value })}
         />
       ))}
-      <S.Submit type="submit" value="Submit" onClick={handleSubmit} />
+      <S.Submit type="submit" value="Submit" onClick={handleSubmit} id="recaptcha-container" />
     </S.Form>
   );
 };

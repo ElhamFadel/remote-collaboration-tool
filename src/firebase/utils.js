@@ -3,9 +3,9 @@ import {
   FacebookAuthProvider,
   getAuth,
   signInWithPopup,
-  GithubAuthProvider
-  // RecaptchaVerifier,
-  // signInWithPhoneNumber
+  GithubAuthProvider,
+  RecaptchaVerifier,
+  signInWithPhoneNumber
 } from 'firebase/auth';
 import './config';
 const auth = getAuth();
@@ -55,32 +55,35 @@ export const loginWithGithub = async () => {
 };
 
 //invisible reCAPTCHA
-// const generateRecaptcha = () => {
-//   console.log('generateRecaptcha');
-//   window.recaptchaVerifier = new RecaptchaVerifier(
-//     'recaptcha-container',
-//     {
-//       size: 'invisible',
-//       callback: (response) => {
-//         console.log(response, 'response', 'Hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
-//       }
-//     },
-//     auth
-//   );
-// };
-// export const requestOTP = async () => {
-//   try {
-//     const phoneNumber = '+972 597 853623';
-//     generateRecaptcha();
-//     console.log('requestOTP Hiiiiiiiiiiii');
-//     const appVerifi = window.recaptchaVerifier;
-//     const confirmationResult = await signInWithPhoneNumber(auth, phoneNumber, appVerifi);
-//     console.log(confirmationResult, 'confirmationResult');
-//     window.confirmationResult = confirmationResult;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+const generateRecaptcha = () => {
+  console.log(auth, 'auth');
+  console.log('generateRecaptcha');
+  window.recaptchaVerifier = new RecaptchaVerifier(
+    'recaptcha-container',
+    {
+      size: 'invisible',
+      callback: (response) => {
+        console.log(response, 'response', 'Hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
+      }
+    },
+    auth
+  );
+};
+export const requestOTP = async (phone) => {
+  try {
+    console.log('+972' + phone.slice(1));
+    const phoneNumber = '+972' + phone.slice(1);
+    generateRecaptcha();
+    console.log('requestOTP Hiiiiiiiiiiii');
+    const appVerifi = window.recaptchaVerifier;
+    console.log(auth, ' authhhhhhhhhhhhh');
+    const confirmationResult = await signInWithPhoneNumber(auth, phoneNumber, appVerifi);
+    console.log(confirmationResult, 'confirmationResult');
+    window.confirmationResult = confirmationResult;
+  } catch (error) {
+    console.log(error);
+  }
+};
 // export const verifyOTP = async () => {
 //   try {
 //     if (code.length === 6) {

@@ -3,7 +3,8 @@ const initialState = {
   password: '',
   name: '',
   phone: '',
-  photo: ''
+  photo: '',
+  isSubmitting: false
 };
 // factore this function
 const stateController = (state, action) => {
@@ -18,6 +19,8 @@ const stateController = (state, action) => {
       return { ...state, phone: action.payload };
     case 'photo':
       return { ...state, photo: action.payload };
+    case 'SUBMIT':
+      return { ...state, isSubmitting: true };
     default:
       return state;
   }
