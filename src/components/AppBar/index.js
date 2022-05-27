@@ -1,9 +1,11 @@
 import Search from '../Search';
-import { useAuthContext } from '../hooks/useAuthProvider';
+// import { useAuthContext } from '../hooks/useAuthProvider';
 import * as S from './style';
 
 const AppBar = () => {
-  const { name, photo } = useAuthContext();
+  // const { name, photo } = useAuthContext();
+  let name = 'User';
+  let photo = 'https://i.pravatar.cc/300';
   return (
     <S.StyledAppBar>
       <Search />
