@@ -5,4 +5,5 @@ export const Container = styled.div`
   background: #e7e7e7;
   width: 85%;
   margin-inline-start: auto;
+  position: relative;
 `;

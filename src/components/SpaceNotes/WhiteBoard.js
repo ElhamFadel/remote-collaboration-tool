@@ -1,7 +1,6 @@
-import React from 'react';
-
+import { CardNote } from '../ui';
 const WhiteBoard = () => {
-  return <div>WhiteBoard</div>;
+  return <CardNote />;
 };
 
 export default WhiteBoard;
