@@ -1,24 +1,23 @@
 import { useEffect } from 'react';
 import { CardNote } from '../ui';
-import Mitt from 'mitt';
+import useStateNote from '../../hooks/useNoteAppProvider';
+// import Mitt from 'mitt';
 import { io } from 'socket.io-client';
 const socket = io('http://localhost:5000');
 import * as S from './style';
-const emitter = new Mitt();
-const createNewNote = async () => {
-  await socket.emit('new-note');
-};
 const WhiteBoard = () => {
+  const {
+    state: { numberOfUsers },
+    dispatch
+  } = useStateNote();
   useEffect(() => {
-    socket.on('connect', () => console.log(socket.id));
-    socket.on('new-note', (noteId, operations) => {});
-    socket.on('connect_error', () => {
-      setTimeout(() => socket.connect(), 5000);
-    });
-    socket.on('disconnect', () => console.log('Client disconnected'));
+    // socket.on('connect', () => console.log(socket.id));
+    socket.on('connect', () => dispatch({ type: 'userJoin' }));
+    socket.on('disconnect', () => dispatch({ type: 'userLeave' }));
   }, []);
   return (
     <S.ContainerWhiteBoard>
+      {numberOfUsers}
       <CardNote />
     </S.ContainerWhiteBoard>
   );

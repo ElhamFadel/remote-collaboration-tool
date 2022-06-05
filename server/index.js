@@ -10,15 +10,15 @@ const io = socketIo(server,{
       origin: 'http://localhost:3000'
     }
 }) 
-io.on('connection',(socket)=>{
-  console.log('client connected: ',socket.id)
+// io.on('connection',(socket)=>{
+//   console.log('client connected: ',socket.id)
   
-  socket.join('clock-room')
+//   socket.join('clock-room')
   
-  socket.on('disconnect',(reason)=>{
-    console.log(reason)
-  })
-})
+//   socket.on('disconnect',(reason)=>{
+//     console.log(reason)
+//   })
+// })
 setInterval(()=>{
      io.to('clock-room').emit('time', new Date())
 },1000)
