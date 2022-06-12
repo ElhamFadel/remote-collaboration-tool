@@ -1,28 +1,21 @@
-const express = require('express')
-const socketIo = require('socket.io')
-const http = require('http')
-const PORT = process.env.PORT || 5000
+const app = require("express")();
+const http = require("http").Server(app);
+const io = require("socket.io")(http);
+const cors = require("cors");
 
-const app = express()
-const server = http.createServer(app)
-const io = socketIo(server,{ 
-    cors: {
-      origin: 'http://localhost:3000'
-    }
-}) 
-// io.on('connection',(socket)=>{
-//   console.log('client connected: ',socket.id)
-  
-//   socket.join('clock-room')
-  
-//   socket.on('disconnect',(reason)=>{
-//     console.log(reason)
-//   })
-// })
-setInterval(()=>{
-     io.to('clock-room').emit('time', new Date())
-},1000)
-server.listen(PORT, err=> {
-  if(err) console.log(err)
-  console.log( 'Server running on Port', PORT)
-})
+io.on("connection", function(socket) {
+  console.log("a user connected");
+  socket.on("new-note", function(data) {
+    io.emit("new-note", data);
+  });
+});
+
+app.use(
+  cors({
+    origin: "http://localhost:3000"
+  })
+);
+
+http.listen(4000, function() {
+  console.log("listening on *:4000");
+});
