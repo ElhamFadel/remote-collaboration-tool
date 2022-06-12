@@ -1,21 +1,24 @@
 const app = require("express")();
-const http = require("http").Server(app);
-const io = require("socket.io")(http);
+const Server = require("http").Server(app);
 const cors = require("cors");
-
+const io = require('socket.io')(Server, {
+    cors: {
+        origin : "http://localhost:3000"
+    }
+});
 io.on("connection", function(socket) {
-  console.log("a user connected");
+  const participants = io.sockets.adapter.rooms.size;
+  io.emit('participants', participants);
   socket.on("new-note", function(data) {
     io.emit("new-note", data);
   });
 });
 
-app.use(
-  cors({
-    origin: "http://localhost:3000"
-  })
-);
+app.use(cors({ 
+  origin: "http://localhost:3000"
+}));
 
-http.listen(4000, function() {
+
+Server.listen(4000, function() {
   console.log("listening on *:4000");
 });

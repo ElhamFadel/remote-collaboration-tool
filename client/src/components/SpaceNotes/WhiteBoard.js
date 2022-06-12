@@ -1,23 +1,26 @@
 import { useEffect } from 'react';
 import { CardNote } from '../ui';
-import useStateNote from '../../hooks/useNoteAppProvider';
-// import Mitt from 'mitt';
-import { io } from 'socket.io-client';
-const socket = io('http://localhost:5000');
+import io from 'socket.io-client';
+const socket = io('http://localhost:4000');
+
 import * as S from './style';
+
 const WhiteBoard = () => {
-  const {
-    state: { numberOfUsers },
-    dispatch
-  } = useStateNote();
   useEffect(() => {
-    // socket.on('connect', () => console.log(socket.id));
-    socket.on('connect', () => dispatch({ type: 'userJoin' }));
-    socket.on('disconnect', () => dispatch({ type: 'userLeave' }));
+    socket.on('participants', (participants) => {
+      console.log(participants, 'participants');
+    });
+    socket.on('new-note', (data) => {
+      console.log('new-note', data);
+    });
+    return () => {
+      socket.off('new-note');
+      socket.off('participants');
+    };
   }, []);
   return (
     <S.ContainerWhiteBoard>
-      {numberOfUsers}
+      <button className="syncing-increase-btn">+</button>
       <CardNote />
     </S.ContainerWhiteBoard>
   );
