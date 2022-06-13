@@ -15,3 +15,13 @@ export const ContainerWhiteBoard = styled.div`
   position: relative;
   padding: 1rem;
 `;
+export const UserAvater = styled.img`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: absolute;
+  top: ${(props) => props.coordinates.y}px;
+  left: ${(props) => props.coordinates.x}px;
+  border: 1px solid #e7e7e7;
+  background: #fff;
+`;
