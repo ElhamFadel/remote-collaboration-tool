@@ -14,7 +14,7 @@ io.on("connection", function(socket) {
   });
   socket.on('client-position', function(data) {
     console.log(data, 'client-position');
-    io.emit('client-position', data);
+    io.emit('client-position', { ...data, id: socket.id });
   }
   );
 });
