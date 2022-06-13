@@ -12,7 +12,13 @@ io.on("connection", function(socket) {
   socket.on("new-note", function(data) {
     io.emit("new-note", data);
   });
+  socket.on('client-position', function(data) {
+    console.log(data, 'client-position');
+    io.emit('client-position', data);
+  }
+  );
 });
+
 
 app.use(cors({ 
   origin: "http://localhost:3000"
