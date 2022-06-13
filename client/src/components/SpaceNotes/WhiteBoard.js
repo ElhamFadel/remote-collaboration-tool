@@ -11,7 +11,7 @@ const WhiteBoard = () => {
     let rect = e.currentTarget.getBoundingClientRect();
     let x = e.clientX - rect.left;
     let y = e.clientY - rect.top;
-    let src = e.currentTarget.getAttribute('src');
+    let src = e.currentTarget.children[0].getAttribute('src');
     socket.emit('client-position', { x, y, src });
     setCoordinates({ x, y });
   };
