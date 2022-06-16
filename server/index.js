@@ -3,7 +3,7 @@ const Server = require("http").Server(app);
 const cors = require("cors");
 const io = require('socket.io')(Server, {
     cors: {
-        origin : "http://localhost:3000"
+        origin : "http://localhost:8080"
     }
 });
 io.on("connection", function(socket) {
@@ -18,6 +18,9 @@ io.on("connection", function(socket) {
   }
   );
 });
+
+
+
 
 
 app.use(cors({ 

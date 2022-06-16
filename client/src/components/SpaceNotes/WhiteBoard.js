@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { CardNote } from '../ui';
 import io from 'socket.io-client';
+
 const socket = io('http://localhost:5000');
 
 import * as S from './style';
@@ -16,13 +17,15 @@ const WhiteBoard = () => {
     socket.emit('client-position', { x, y, src });
     setCoordinates({ x, y });
   };
-  console.log(participations, 'participations');
   useEffect(() => {
     socket.on('participants', (participants) => {
       console.log(participants, 'participants');
     });
     socket.on('client-position', (data) => {
-      setParticipations({ ...participations, [data.id]: data });
+      // console.log(data, 'Previous data');
+      setParticipations((prev) => {
+        return { ...prev, [data.id]: data };
+      });
     });
     socket.on('new-note', (data) => {
       console.log('new-note', data);

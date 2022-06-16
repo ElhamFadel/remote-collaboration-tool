@@ -4,7 +4,8 @@ const initialState = {
   name: '',
   phone: '',
   photo: '',
-  isSubmitting: false
+  isSubmitting: false,
+  users: {}
 };
 // factore this function
 const stateController = (state, action) => {
@@ -21,6 +22,14 @@ const stateController = (state, action) => {
       return { ...state, photo: action.payload };
     case 'SUBMIT':
       return { ...state, isSubmitting: true };
+    case 'USER_DATA':
+      return {
+        ...state,
+        users: {
+          ...state.users,
+          [action.payload.id]: action.payload
+        }
+      };
     default:
       return state;
   }
