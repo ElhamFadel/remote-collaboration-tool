@@ -5,7 +5,8 @@ import {
   signInWithPopup,
   GithubAuthProvider,
   RecaptchaVerifier,
-  signInWithPhoneNumber
+  signInWithPhoneNumber,
+  onAuthStateChanged
 } from 'firebase/auth';
 import './config';
 const auth = getAuth();
@@ -13,6 +14,8 @@ const auth = getAuth();
 const googleAuthProvider = new GoogleAuthProvider();
 const facebookAuthProvider = new FacebookAuthProvider();
 const githubAuthProvider = new GithubAuthProvider();
+
+export const createToken = () => window.localStorage.setItem('accessToken', 'true');
 
 //login with googlw
 export const loginWithGoogle = async () => {
@@ -22,6 +25,7 @@ export const loginWithGoogle = async () => {
     const token = credential.accessToken;
     console.log(token, 'token');
     const user = result.user;
+    createToken();
     console.log(user, 'user');
     console.log(user.displayName, 'user.displayName', user.email);
     return new Promise((resolve) => {
@@ -38,6 +42,7 @@ export const loginWithFacebook = async () => {
     const result = await signInWithPopup(auth, facebookAuthProvider);
     const user = result.user;
     console.log(user, 'user');
+    createToken();
     return { email: user.email, name: user.displayName, photo: user.photoURL };
   } catch (error) {
     console.log(error);
@@ -49,6 +54,7 @@ export const loginWithGithub = async () => {
   try {
     const result = await signInWithPopup(auth, githubAuthProvider);
     const user = result.user;
+    createToken();
     return { email: user.email, name: user.displayName, photo: user.photoURL };
   } catch (error) {
     console.log(error);
@@ -85,6 +91,24 @@ export const requestOTP = async (phone) => {
     console.log(error);
   }
 };
+
+export const getUserInfo = async () => {
+  let user = null;
+
+  try {
+    if (window.localStorage.getItem('accessToken')) {
+      await onAuthStateChanged(async (user) => {
+        if (user) {
+          console.log(user, 'user');
+          return user;
+        }
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  return user;
+};
 // export const verifyOTP = async () => {
 //   try {
 //     if (code.length === 6) {
@@ -92,7 +116,7 @@ export const requestOTP = async (phone) => {
 //       confirmationResult
 //         .confirm(code)
 //         .then((result) => {
-//           // User signed in successfully.
+//           // User signed in successfully..
 //           const user = result.user;
 //           console.log('User signed in successfully', result, user);
 //           // ...
