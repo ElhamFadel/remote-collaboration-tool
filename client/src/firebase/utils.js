@@ -13,6 +13,7 @@ const auth = getAuth();
 const googleAuthProvider = new GoogleAuthProvider();
 const facebookAuthProvider = new FacebookAuthProvider();
 const githubAuthProvider = new GithubAuthProvider();
+
 //login with googlw
 export const loginWithGoogle = async () => {
   try {
@@ -63,15 +64,15 @@ const generateRecaptcha = () => {
     {
       size: 'invisible',
       callback: (response) => {
-        console.log(response, 'response', 'Hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
+        console.log(response, 'response');
       }
     },
     auth
   );
 };
+
 export const requestOTP = async (phone) => {
   try {
-    console.log('+972' + phone.slice(1));
     const phoneNumber = '+972' + phone.slice(1);
     generateRecaptcha();
     console.log('requestOTP Hiiiiiiiiiiii');
