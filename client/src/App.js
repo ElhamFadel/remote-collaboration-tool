@@ -1,11 +1,11 @@
 import './App.css';
-import Auth from './pages/Auth';
+import Navigation from './components/Navigation';
 import UseAuthProvider from './hooks/useAuthProvider';
 
 function App() {
   return (
     <UseAuthProvider>
-      <Auth />
+      <Navigation />
     </UseAuthProvider>
   );
 }

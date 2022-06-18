@@ -93,20 +93,19 @@ export const requestOTP = async (phone) => {
 };
 
 export const getUserInfo = () => {
-  let user = null;
-  try {
+  return new Promise((resolve, reject) => {
     if (window.localStorage.getItem('accessToken')) {
       onAuthStateChanged(auth, (user) => {
         if (user) {
-          console.log(user, 'userrrrr');
-          return user;
+          resolve(user);
+        } else {
+          reject('no user');
         }
       });
+    } else {
+      reject('no user');
     }
-  } catch (error) {
-    console.log(error);
-  }
-  return user;
+  });
 };
 // export const verifyOTP = async () => {
 //   try {

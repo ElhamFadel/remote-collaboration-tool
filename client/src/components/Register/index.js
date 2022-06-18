@@ -4,12 +4,11 @@ import Form from '../Form';
 const Register = () => {
   return (
     <S.RegisterContainer>
-      {/* <S.RegisterLogo /> */}(
+      {/* <S.RegisterLogo /> */}
       <>
         <RowSign />
         <Form />
       </>
-      )
     </S.RegisterContainer>
   );
 };
