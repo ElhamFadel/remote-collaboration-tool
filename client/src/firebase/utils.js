@@ -92,14 +92,13 @@ export const requestOTP = async (phone) => {
   }
 };
 
-export const getUserInfo = async () => {
+export const getUserInfo = () => {
   let user = null;
-
   try {
     if (window.localStorage.getItem('accessToken')) {
-      await onAuthStateChanged(async (user) => {
+      onAuthStateChanged(auth, (user) => {
         if (user) {
-          console.log(user, 'user');
+          console.log(user, 'userrrrr');
           return user;
         }
       });

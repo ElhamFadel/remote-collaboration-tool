@@ -1,14 +1,11 @@
 import { createContext, useContext, useEffect } from 'react';
 import { initialState } from '../store';
+import { getUserInfo } from '../firebase/utils';
 export const creatAuthContext = createContext();
 export const useAuthContext = () => useContext(creatAuthContext);
 const UserProvider = ({ children }) => {
   useEffect(() => {
-    // if (user) {
-    //   window.localStorage.setItem('auth', 'true');
-    //   user.getIdToken(true).then((tokenId) => setToken(tokenId));
-    //   setError(null);
-    // }
+    console.log(getUserInfo(), 'getUserInfo');
   }, []);
   return <creatAuthContext.Provider value={initialState}>{children}</creatAuthContext.Provider>;
 };
