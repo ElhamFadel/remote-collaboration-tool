@@ -1,5 +1,6 @@
 import * as S from './style';
 import useForm from '../../../hooks/useForm';
+
 const Button = ({ label, color, width, onClick }) => {
   const { dispatch } = useForm();
   return (
@@ -7,10 +8,11 @@ const Button = ({ label, color, width, onClick }) => {
       color={color}
       width={width}
       onClick={() =>
-        onClick().then(({ name, email, photo }) => {
+        onClick().then(({ name, email, photo, accessToken }) => {
           dispatch({ type: 'name', payload: name });
           dispatch({ type: 'email', payload: email });
           dispatch({ type: 'photo', payload: photo });
+          dispatch({ type: 'accessToken', payload: accessToken });
         })
       }>
       {label}

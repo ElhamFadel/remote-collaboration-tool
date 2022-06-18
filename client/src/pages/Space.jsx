@@ -2,6 +2,7 @@ import SideBar from '../components/SideBar';
 import SpaceNotes from '../components/SpaceNotes';
 import styled from 'styled-components';
 const Space = () => {
+  console.log('Hellllllllllllo', 'imimi');
   return (
     <Container>
       <SideBar />

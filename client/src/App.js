@@ -1,11 +1,11 @@
 import './App.css';
-import Space from './pages/Space';
+import Navigation from './components/Navigation';
 import UseAuthProvider from './hooks/useAuthProvider';
 
 function App() {
   return (
     <UseAuthProvider>
-      <Space />
+      <Navigation />
     </UseAuthProvider>
   );
 }
