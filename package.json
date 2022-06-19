@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./server/index.js",
+    "start": "concurrently \"npm run client\" \"npm run start\"",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run client\" \"npm run start\""
+    "dev": "concurrently \"npm run client\" \"npm run start\"",
+    "setup": "npm i && cd client npm i"
+    
   },
   "repository": {
     "type": "git",
