@@ -4,7 +4,6 @@
 - Elham Elshami
 ## Application Link :link:
 
-[check it out from here]()
 ## Description :
 
 
