@@ -1,4 +1,5 @@
-# Notes App
+# remote-collaboration-tool
+
 ### Author
 
 - Elham Elshami
